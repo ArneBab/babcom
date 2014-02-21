@@ -36,7 +36,9 @@ Jegliche Interaktion läuft in dem iframe, so dass das Javascript nichts über L
 
 Die folgenden Schritte verschönern den Stil der eingebundenen Kommentare.
 
-*** iframe, corrct size
+(geht alles nicht: Cross-Domain-Requests müsste Freenet erlauben, was eine erhebliche Sicherheitslücke schaffen würde. Um das zu ermöglichen, bräuchte es einen zweiten lokalen Dienst, der aus verschiedenen Quellen Kommentare lädt - z.B. aus E-Mail via mu oder akonadi)
+
+*** iframe, correct size
 
 Als zweiten Schritt kann das Javascript die Daten laden, die Größe des Inhaltes mit den Kommentaren berechnen und dann einen für Seite und Kommentare passenden iframe erzeugen.
 
@@ -90,7 +92,7 @@ Um die jeweiligen Informationen zu kodieren, sollte die notes-Erweiterung die je
 
 Um unabhängig von Seitenbetreibern zu werden, kann das Script erst via Greasemonkey eingebunden und dann in Browser-Erweiterungen konsolidiert werden.
 
-Dafür zu lösende Herausforderungen: Nach welchen IDs und NAMEs sollte ein Kommentarfeld plaziert werden - oder allgemeiner: Wo sollten Kommentare auftauchen.
+Dafür zu lösende Herausforderungen: Nach welchen IDs und NAMEs sollte ein Kommentarfeld plaziert werden - oder allgemeiner: Wo sollten Kommentare auftauchen?
 
 Um das zu vereinfachen, könnte das Greasemonkey-Skript ein allgemeines Kommentar-Overlay anbieten, das nur dann an einem bestimmten Ort auf der Seite lokalisiert, wenn entsprechende IDs in den Kommentaren stehen. Dafür muss dann zwar pro ID auf der Seite eine Anfrage an die Freenet-Erweiterung geschickt werden, aber da die lokal läuft, sollte das keine großen Kosten und keine große Latenz verursachen (zumindest nicht bei guter Implementierung).
 
