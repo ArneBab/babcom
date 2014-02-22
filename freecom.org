@@ -214,7 +214,7 @@ I just connected them to all the websites out there.
 
 * Where to go from here?
 
-In its current state, this works pretty well (if you have Freenet and Sone setup it loads faster than Disqus), but there are still lots of things which could be improved.
+In its current state, this works pretty well (if you already run Freenet and Sone, it loads faster than Disqus), but there are still lots of things which could be improved.
 
 - Some changes in Sone can make Freecom much easier to use.
   - Add a text field to post a message directly to a search (currently you need to go to your profile page and post from there).
