@@ -1,6 +1,8 @@
 #+title: Freecom: Anonymous, Decentral Comment-System for Static Websites
 #+options: num:nil toc:nil
 
+# TODO and FIXME: Make the publish setup work again!
+
 #+BEGIN_ABSTRACT
 Freecom provides Decentral, Anonymous, Spamresistant comments on Static Websites using [[http://freenetproject.org][Freenet]] with [[http://freesocial.draketo.de/sone_en.html][Sone]] and some simple Javascript.
 #+END_ABSTRACT
@@ -214,16 +216,15 @@ I just connected them to all the websites out there.
 
 In its current state, this works pretty well (if you have Freenet and Sone setup it loads faster than Disqus), but there are still lots of things which could be improved.
 
-Some changes in Sone can make Freecom much easier to use.
-
-- Add a text field to post a message directly to a search (currently you need to go to your profile page and post from there).
-- Precompute Searches for URLs to have almost instant results.
-
-And then Freenet with the Web of Trust could become easier to setup. If you want to help, plesae see [[contribute][Contribute]]!
-
-And this script might get a way to store a cookie, to make it remember the location of your node.
-
-And integration with the Freemail-plugin would be cool, it could provide an anonymous contact-page, maybe using microformats to find the Freemail address for sending in a way which also allows using external tools.
+- Some changes in Sone can make Freecom much easier to use.
+  - Add a text field to post a message directly to a search (currently you need to go to your profile page and post from there).
+  - Precompute Searches for URLs to have almost instant results.
+- And then Freenet with the Web of Trust could become easier to setup. If you want to help, plesae see [[contribute][Contribute]]!
+- And this script might get a way to store a cookie, to make it remember the location of your node.
+- And integration with the Freemail-plugin would be cool, it could provide an anonymous contact-page, maybe using microformats to find the Freemail address for sending in a way which also allows using external tools.
+- Integrate into the Freenet-HTML-Filter, so that all freesite authors can just add =<div class="freecom-comments"></div>= to get a comment-field.
+- Add an “insert to freenet”-button which inserts the current site into freenet and then posts a message with the USK, the title and the original URL. That could be used by authors and would provide strong anonymity for anonymous commenters who write the first real comment. This would require some support from Sone to make it convenient to use.
+- Give the freecom-site a better theme - maybe taken from the [[http://draketo.de/proj/hgsite][static site extension]].
 
 * Who are you?
 
