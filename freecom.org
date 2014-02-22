@@ -225,6 +225,7 @@ In its current state, this works pretty well (if you already run Freenet and Son
 - Integrate into the Freenet-HTML-Filter, so that all freesite authors can just add =<div class="freecom-comments"></div>= to get a comment-field.
 - Add an “insert to freenet”-button which inserts the current site into freenet and then posts a message with the USK, the title and the original URL. That could be used by authors and would provide strong anonymity for anonymous commenters who write the first real comment. This would require some support from Sone to make it convenient to use.
 - Give the freecom-site a better theme - maybe taken from the [[http://draketo.de/proj/hgsite][static site extension]].
+- Find a new name: Freecom is the name of a company…
 
 * Who are you?
 
