@@ -13,7 +13,7 @@ Freecom provides Decentral, Anonymous, Spamresistant comments on Static Websites
 
 Freecom is a commenting system for static websites. It is decentral and enables anonymous and non-anonymous commenters to interact seamlessly without giving free reign to spammers.
 
-Thanks go to Sandy from [[https://openitp.org/][OpenITP]] who was really enthusiastic when I told her about this idea!
+Thanks go to digger3 with whom I bounced ideas back and forth which led to the current plan and to Sandy from [[https://openitp.org/][OpenITP]] who was really enthusiastic when I told her about this idea!!
 
 * Why are you doing this?
 
