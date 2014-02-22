@@ -1,0 +1,327 @@
+#+title: Freecom: Anonymous, Decentral Comment-System for Static Websites
+#+options: num:nil toc:nil
+
+#+BEGIN_ABSTRACT
+Freecom provides Decentral, Anonymous, Spamresistant comments on Static Websites using [[http://freenetproject.org][Freenet]] with [[http://freesocial.draketo.de/sone_en.html][Sone]] and some simple Javascript.
+#+END_ABSTRACT
+#+TOC: headlines 2
+
+
+* What is this?
+
+Freecom is a commenting system for static websites. It is decentral and enables anonymous and non-anonymous commenters to interact seamlessly without giving free reign to spammers.
+
+Thanks go to Sandy from [[https://openitp.org/][OpenITP]] who was really enthusiastic when I told her about this idea!
+
+* Why are you doing this?
+
+One of my pages was hacked. Badly. So badly that I had to kill it. See [[http://gute-neuigkeiten.de][its grave]].
+
+I decided to only use static pages for future projects: Unhackable (with a well-maintained host), Fast, Low-maintenance. 
+
+But I still want comments. Without Spam. And without subjugating to a centralized service.
+
+* Sounds cool! Can I try it?
+
+You already do! (see below)
+
+Do you like it?
+
+#+BEGIN_HTML
+  <!-- Freecom: Decentral Anonymous Spamresistant comments on Static Websites.
+  
+  Copyright: 2014 Arne Babenhauserheide (http://draketo.de) You are free
+  to use this under any license you chose. If you want to be nice,
+  release your changes under free software licenses.  -->
+  <style type="text/css">
+  #freecom-realcomments, #freecom-publicsoneid iframe {
+    min-width: 1024px;
+    min-height: 400px;
+  }
+  </style>
+  <!-- TODO: Save the node in a cookie -->
+  <p><button type="button" onclick="loadcomments()">Reload Comments</button> Use Node: <input type="text" name="freecom-node" id="freecom-node" value="http://127.0.0.1:8888" /></p>
+  <p id="freecom-comments"></p>
+  <p id="freecom-nojswarning">If you had Javascript enabled, you would see comments for this page instead of the Sone page of the sites author.</p>
+  <iframe id="freecom-publicsoneid" src="http://127.0.0.1:8888/Sone/viewSone.html?sone=6~ZDYdvAgMoUfG6M5Kwi7SQqyS-gTcyFeaNN1Pf3FvY"></iframe>
+  <p>(To see the comments, you need a locally running <a href="http://freenetproject.org">Freenet</a> with the Sone-Plugin. If you see something like <code>Invalid key: java.net.MalformedURLException: There is no @ in that URI! (Sone/search.html)</code>, you need to install <a href="http://freesocial.draketo.de/sone_en.html">Sone</a>)</p>
+  <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
+  <p>Link to this site: <span id="freecom-sitelink"></span></p>
+  <script type="text/javascript">
+          /* @licstart The following is the entire license notice for
+          the JavaScript code within this script block (script
+          to /script).
+  
+          Copyright (C) 2014  Arne Babenhauserheide
+  
+          The JavaScript code in this page is free software: you can
+          redistribute it and/or modify it under the terms of the GNU
+          General Public License (GNU GPL) as published by the Free Software
+          Foundation, either version 3 of the License, or (at your option)
+          any later version.  The code is distributed WITHOUT ANY WARRANTY;
+          without even the implied warranty of MERCHANTABILITY or FITNESS
+          FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+  
+          As additional permission under GNU GPL version 3 section 7, you
+          may distribute non-source (e.g., minimized or compacted) forms of
+          that code without the copy of the GNU GPL normally required by
+          section 4, provided you include this license notice and a URL
+          through which recipients can access the Corresponding Source.   
+  
+          As additional permission under GNU GPL version 3 section 7,
+          you may use this code under any other free software license,
+          including permissive licenses like BSD and MIT.
+  
+          @licend  The above is the entire license notice
+          for the JavaScript code  within these script block.
+          ,*/
+  function loadcomments()
+  {
+  var freenetnode = document.getElementById("freecom-node").value
+  var sonesearch = "/Sone/search.html?query="
+  var host = window.location.host;
+  var path = window.location.pathname;
+  var postsanchor = "post-results";
+  var searchquery = host + path + "#" + postsanchor;
+  var comments = document.getElementById("freecom-comments");
+  var publicsone = document.getElementById("freecom-publicsoneid");
+  var nojswarning = document.getElementById("freecom-nojswarning");
+  var sitelink = document.getElementById("freecom-sitelink");
+  comments.innerHTML = "<iframe id=\"freecom-realcomments\" src=\"" + freenetnode + sonesearch + searchquery + "\"></iframe>";
+  nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
+  publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
+  sitelink.innerHTML = "http://" + host + path;
+  }
+  loadcomments();
+  document.getElementById("freecom-node").onkeydown = function(e) {
+      var keyCode = e.keyCode || e.which;
+  
+     if (keyCode === 13) {
+       loadcomments();
+     }
+  }
+  </script>
+  
+#+END_HTML
+
+* I don’t yet run freenet! How does this look?
+
+For me it looks like this:
+
+[[file:2014-02-21-Fr-freecom-screenshot.png]]
+
+/It might look different for you depending on the theme you choose for freenet. What you see above uses the rabbit-hole theme./
+
+* I want that for my site!
+
+Great!
+
+Just copy the following snippet to your site, and you’re good to go. The comments will appear where you pasted the snippet. All the code is inline and pure Javascript, so you can just paste it into any site which accepts HTML.
+
+#+BEGIN_SRC javascript
+  <!-- Freecom: Decentral Anonymous Spamresistant comments on Static Websites.
+  
+  Copyright: 2014 Arne Babenhauserheide (http://draketo.de) You are free
+  to use this under any license you chose. If you want to be nice,
+  release your changes under free software licenses.  -->
+  <style type="text/css">
+  #freecom-realcomments, #freecom-publicsoneid iframe {
+    min-width: 1024px;
+    min-height: 400px;
+  }
+  </style>
+  <!-- TODO: Save the node in a cookie -->
+  <p><button type="button" onclick="loadcomments()">Reload Comments</button> Use Node: <input type="text" name="freecom-node" id="freecom-node" value="http://127.0.0.1:8888" /></p>
+  <p id="freecom-comments"></p>
+  <p id="freecom-nojswarning">If you had Javascript enabled, you would see comments for this page instead of the Sone page of the sites author.</p>
+  <iframe id="freecom-publicsoneid" src="http://127.0.0.1:8888/Sone/viewSone.html?sone=6~ZDYdvAgMoUfG6M5Kwi7SQqyS-gTcyFeaNN1Pf3FvY"></iframe>
+  <p>(To see the comments, you need a locally running <a href="http://freenetproject.org">Freenet</a> with the Sone-Plugin. If you see something like <code>Invalid key: java.net.MalformedURLException: There is no @ in that URI! (Sone/search.html)</code>, you need to install <a href="http://freesocial.draketo.de/sone_en.html">Sone</a>)</p>
+  <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
+  <p>Link to this site: <span id="freecom-sitelink"></span></p>
+  <script type="text/javascript">
+          /* @licstart The following is the entire license notice for
+          the JavaScript code within this script block (script
+          to /script).
+  
+          Copyright (C) 2014  Arne Babenhauserheide
+  
+          The JavaScript code in this page is free software: you can
+          redistribute it and/or modify it under the terms of the GNU
+          General Public License (GNU GPL) as published by the Free Software
+          Foundation, either version 3 of the License, or (at your option)
+          any later version.  The code is distributed WITHOUT ANY WARRANTY;
+          without even the implied warranty of MERCHANTABILITY or FITNESS
+          FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+  
+          As additional permission under GNU GPL version 3 section 7, you
+          may distribute non-source (e.g., minimized or compacted) forms of
+          that code without the copy of the GNU GPL normally required by
+          section 4, provided you include this license notice and a URL
+          through which recipients can access the Corresponding Source.   
+  
+          As additional permission under GNU GPL version 3 section 7,
+          you may use this code under any other free software license,
+          including permissive licenses like BSD and MIT.
+  
+          @licend  The above is the entire license notice
+          for the JavaScript code  within these script block.
+          ,*/
+  function loadcomments()
+  {
+  var freenetnode = document.getElementById("freecom-node").value
+  var sonesearch = "/Sone/search.html?query="
+  var host = window.location.host;
+  var path = window.location.pathname;
+  var postsanchor = "post-results";
+  var searchquery = host + path + "#" + postsanchor;
+  var comments = document.getElementById("freecom-comments");
+  var publicsone = document.getElementById("freecom-publicsoneid");
+  var nojswarning = document.getElementById("freecom-nojswarning");
+  var sitelink = document.getElementById("freecom-sitelink");
+  comments.innerHTML = "<iframe id=\"freecom-realcomments\" src=\"" + freenetnode + sonesearch + searchquery + "\"></iframe>";
+  nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
+  publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
+  sitelink.innerHTML = "http://" + host + path;
+  }
+  loadcomments();
+  document.getElementById("freecom-node").onkeydown = function(e) {
+      var keyCode = e.keyCode || e.which;
+  
+     if (keyCode === 13) {
+       loadcomments();
+     }
+  }
+  </script>
+#+END_SRC
+
+* How does this work?
+
+The small Javascript above gets the site URL, then it submits a search request on your local Sone instance by creating an iframe with the right URL.
+
+* Isn’t this hard?
+
+That’s what I thought. It is the reason, why it took me half a year of planning and thinking before I actually started. Then I chose to take the simple route and just integrate things which already work well. And the first prototype took just 3 hours (thanks to some great advice from Thomas L. - Thank you!).
+
+But actually Freenet is hard. It provides a censorship resistant, decentral, anonymous, global datastore and took 10 years to get it working as well as it does today. Thanks for that go to Matthew Toseland (our former donation-funded full-time developer who’s now studying at Cambridge) and many contributors.
+
+And the Web of Trust for Spam Resistance in Anonymous Networks is hard. It enables seamless communication between anonymous and non-anonymous users without being drowned in Spam. Thanks for that goes to p0s aka xor.
+
+And Sone is hard. Especially making it easy and enjoyable to use is hard. Thanks for that go to David „Bombe“ Roden.
+
+I just connected them to all the websites out there.
+
+* Where to go from here?
+
+In its current state, this works pretty well (if you have Freenet and Sone setup it loads faster than Disqus), but there are still lots of things which could be improved.
+
+Some changes in Sone can make Freecom much easier to use.
+
+- Add a text field to post a message directly to a search (currently you need to go to your profile page and post from there).
+- Precompute Searches for URLs to have almost instant results.
+
+And then Freenet with the Web of Trust could become easier to setup. If you want to help, plesae see [[contribute][Contribute]]!
+
+And this script might get a way to store a cookie, to make it remember the location of your node.
+
+And integration with the Freemail-plugin would be cool, it could provide an anonymous contact-page, maybe using microformats to find the Freemail address for sending in a way which also allows using external tools.
+
+* Who are you?
+
+I’m Arne Babenhauserheide, I live in Graben (Germany) and I’m currently doing my PhD in physics at Karlsruhe Institute of Technology (KIT). [[http://draketo.de/themes/1w6/minnelli/logo.png]]
+
+I work on Freecom along with other free software and free culture projects, because I want to make the world a better place - if not for me than at least for my children.
+
+The fight against censorship and surveillance is a pretty important battle for that. And one I’m equipped to fight (along with the battle for [[http://freedomdefined.org][free culture]] and spreading roleplaying games as a unique synthesis of art and communication).
+
+You can find more of my stuff on [[http://draketo.de][draketo.de]] (my personal site) and [[http://1w6.org][1w6.org]] (the site of the free roleplaying game I contribute to).
+
+# With JQuery:
+# 
+# $(location).attr('href');
+# 
+# In pure JS:
+# 
+# http://stackoverflow.com/questions/3612956/how-can-i-do-jquerys-get-in-pure-javascript-without-wanting-to-return-anyth
+# 
+# window.location.host
+# window.location.pathname
+# 
+# 
+# http://stackoverflow.com/questions/9310112/why-am-i-seeing-an-origin-is-not-allowed-by-access-control-allow-origin-error
+# 
+# Required Header response:
+# 
+# Access-Control-Allow-Origin: *
+# 
+# http://stackoverflow.com/questions/9310112/why-am-i-seeing-an-origin-is-not-allowed-by-access-control-allow-origin-error
+# http://stackoverflow.com/questions/10143093/origin-is-not-allowed-by-access-control-allow-origin
+# http://cypressnorth.com/programming/cross-domain-ajax-request-with-json-response-for-iefirefoxchrome-safari-jquery/
+# 
+# http://code.google.com/p/html5security/wiki/CrossOriginRequestSecurity
+# 
+# ⇒ required: A safe checking page which potentially returns info, then add the iframe. Maybe use JSON after all…
+# 
+# http://molily.de/js/sicherheit.html
+
+** Can I support you?
+
+Sure!
+
+*** Spread the word:
+
+/What a disruptive technology needs the most is getting known!/
+
+#+BEGIN_HTML
+<ul>
+<li>Reddit this site: <script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></li>
+<li>Tweet this site: <a href="https://twitter.com/share" class="twitter-share-button" data-via="ArneBab" data-dnt="true">Tweet</a><script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
+<li>Plus this site: <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script><g:plusone></g:plusone></li>
+</ul>
+#+END_HTML
+- Slashdot this site /(it is static, it should survive the slashdot effect - and content freenet actually gets faster when more people access it!)/
+- Dent this site on [[https://quitter.se/][Quitter]] or [[https://loadaverage.org/][Load Average]] or one of the other [[http://gnu.io/try/][GNU social sites]].
+- or, well, you know the thing with book in its name.
+
+If you use a news-site which is missing here, please drop me a line! (the comment form is above - you’re already running Freenet with Sone, right?)
+
+/(yes, I understand the irony of using centralized systems to spread the word about decentralized systems. Well, we have to start where we are, and if it gets more people to use freecom as decentral, anonymous, spam-resistant commenting system on mostly unhackable static pages, that’s a prize I’m willing to pay. On the upside: If most pages use this system, there won’t be a need to go this way in the future - and that’s a dream worth fighting for!)/
+
+*** Or support me directly:
+
+/It pays my server, and if it should be enough one day, it would allow me to spend more time on stuff for which no big company wants to pay a salary/
+
+#+BEGIN_HTML
+<ul>
+<li>Flattr me: <a href="https://flattr.com/submit/auto?user_id=ArneBab&url=http%3A%2F%2Fdraketo.de%2Fproj%2Ffreecom%2F&title=Freecom:%20Anonymous,%20Decentral%20Comment-System%20for%20Static%20Websites" target="_blank"><img src="//api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></li>
+<li>Gittip me: <script type="text/javascript" data-gittip-username="ArneBab" data-gittip-widget="button" src="//gttp.co/v1.js"></script></li>
+</ul>
+#+END_HTML
+
+- Buy my [[http://www.lulu.com/shop/arne-babenhauserheide/ein-w%C3%BCrfel-system-1w6-regeln-261/paperback/product-21368221.html;jsessionid=3AB29640BE32BC3FCC420DFE12B1A8F4][free licensed roleplaying book (german)]] (that’s my main contribution to free culture, so if you do that, you not only support me but also free culture and roleplaying)
+
+*** Or [[https://freenetproject.org/donate.html][donate to Freenet]]:
+
+/Freenet is the technology powering all this, and it lives off donations!/
+
+→ [[https://freenetproject.org/donate.html][freenetproject.org/donate.html]]
+
+*** Contribute to Freenet development:
+
+<<contribute>>
+
+If you can hack Java and want to help, please get in contact! (via [[https://freenetproject.org/lists.html][email]] or [[https://webchat.freenode.net/?randomnick=1&channels=freenet][chat]] - #freenet @ freenode)
+
+*** Or, most importantly, install Freenet and use Freecom!
+
+See [[https://freenetproject.org][freenetproject.org]].
+
+Nowadays Freenet works pretty well, though it still isn’t perfectly polished, so expect some hickups. 
+Let’s close this with the quote which made me start using freenet over ten years ago:
+
+#+BEGIN_QUOTE
+"I worry about my child and the Internet all the time, even though she's too young to have logged on yet. Here's what I worry about. I worry that 10 or 15 years from now, she will come to me and say 'Daddy, where were you when they took freedom of the press away from the Internet?'" — Mike Godwin, [[https://www.eff.org/][Electronic Frontier Foundation]]
+#+END_QUOTE
+
+# Local Variables:
+# org-html-doctype: "html5"
+# End:
