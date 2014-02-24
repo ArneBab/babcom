@@ -1,23 +1,31 @@
-#+title: Freecom: Anonymous, Decentral Comment-System for Static Websites
+#+title: Babcom: Anonymous, Decentral Comment-System for Static Websites
 #+options: num:nil toc:nil
 
+# TODO and FIXME: Make the publish setup work for ~/Quell/Programme/freecom
+
 #+BEGIN_ABSTRACT
-Freecom provides Decentral, Anonymous, Spamresistant comments on Static Websites using [[http://freenetproject.org][Freenet]] with [[http://freesocial.draketo.de/sone_en.html][Sone]] and some simple Javascript.
+Babcom provides Decentral, Anonymous, Spamresistant comments on Static Websites using [[http://freenetproject.org][Freenet]] with [[http://freesocial.draketo.de/sone_en.html][Sone]] and some simple Javascript.
+
+/Freecom got renamed to babcom, because freecom is a registered trademark and it does not help the battle against censorship if this site gets sued offline./
 #+END_ABSTRACT
 #+TOC: headlines 2
 
 
 * What is this?
 
-Freecom is a commenting system for static websites. It is decentral and enables anonymous and non-anonymous commenters to interact seamlessly without giving free reign to spammers.
+Babcom is a commenting system for static websites. It is decentral and enables anonymous and non-anonymous commenters to interact seamlessly without giving free reign to spammers.
 
 Thanks go to Sandy from [[https://openitp.org/][OpenITP]] who was really enthusiastic when I told her about this idea!
 
 * Why are you doing this?
 
+#+BEGIN_QUOTE
+/babcom is the internets last, best hope for peace.[fn:hope]/
+#+END_QUOTE
+
 One of my pages was hacked. Badly. So badly that I had to kill it. See [[http://gute-neuigkeiten.de][its grave]].
 
-I decided to only use static pages for future projects: Unhackable (with a well-maintained host), Fast, Low-maintenance. 
+I decided to only use static pages for future projects: Unhackable (with a well-maintained host), Fast, Low-maintenance. Suited for the battlefield of the internet today.
 
 But I still want comments. Without Spam. And without subjugating to a centralized service.
 
@@ -28,80 +36,109 @@ You already do! (see below)
 Do you like it?
 
 #+BEGIN_HTML
-  <!-- Freecom: Decentral Anonymous Spamresistant comments on Static Websites.
-  
-  Copyright: 2014 Arne Babenhauserheide (http://draketo.de) You are free
-  to use this under any license you chose. If you want to be nice,
-  release your changes under free software licenses.  -->
-  <style type="text/css">
-  #freecom-realcomments, #freecom-publicsoneid iframe {
-    min-width: 1024px;
-    min-height: 400px;
-  }
-  </style>
-  <!-- TODO: Save the node in a cookie -->
-  <p><button type="button" onclick="loadcomments()">Reload Comments</button> Use Node: <input type="text" name="freecom-node" id="freecom-node" value="http://127.0.0.1:8888" /></p>
-  <p id="freecom-comments"></p>
-  <p id="freecom-nojswarning">If you had Javascript enabled, you would see comments for this page instead of the Sone page of the sites author.</p>
-  <iframe id="freecom-publicsoneid" src="http://127.0.0.1:8888/Sone/viewSone.html?sone=6~ZDYdvAgMoUfG6M5Kwi7SQqyS-gTcyFeaNN1Pf3FvY"></iframe>
-  <p>(To see the comments, you need a locally running <a href="http://freenetproject.org">Freenet</a> with the Sone-Plugin. If you see something like <code>Invalid key: java.net.MalformedURLException: There is no @ in that URI! (Sone/search.html)</code>, you need to install <a href="http://freesocial.draketo.de/sone_en.html">Sone</a>)</p>
-  <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
-  <p>Link to this site: <span id="freecom-sitelink"></span></p>
-  <script type="text/javascript">
-          /* @licstart The following is the entire license notice for
-          the JavaScript code within this script block (script
-          to /script).
-  
-          Copyright (C) 2014  Arne Babenhauserheide
-  
-          The JavaScript code in this page is free software: you can
-          redistribute it and/or modify it under the terms of the GNU
-          General Public License (GNU GPL) as published by the Free Software
-          Foundation, either version 3 of the License, or (at your option)
-          any later version.  The code is distributed WITHOUT ANY WARRANTY;
-          without even the implied warranty of MERCHANTABILITY or FITNESS
-          FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-  
-          As additional permission under GNU GPL version 3 section 7, you
-          may distribute non-source (e.g., minimized or compacted) forms of
-          that code without the copy of the GNU GPL normally required by
-          section 4, provided you include this license notice and a URL
-          through which recipients can access the Corresponding Source.   
-  
-          As additional permission under GNU GPL version 3 section 7,
-          you may use this code under any other free software license,
-          including permissive licenses like BSD and MIT.
-  
-          @licend  The above is the entire license notice
-          for the JavaScript code  within these script block.
-          ,*/
-  function loadcomments()
-  {
-  var freenetnode = document.getElementById("freecom-node").value
-  var sonesearch = "/Sone/search.html?query="
-  var host = window.location.host;
-  var path = window.location.pathname;
-  var postsanchor = "post-results";
-  var searchquery = host + path + "#" + postsanchor;
-  var comments = document.getElementById("freecom-comments");
-  var publicsone = document.getElementById("freecom-publicsoneid");
-  var nojswarning = document.getElementById("freecom-nojswarning");
-  var sitelink = document.getElementById("freecom-sitelink");
-  comments.innerHTML = "<iframe id=\"freecom-realcomments\" src=\"" + freenetnode + sonesearch + searchquery + "\"></iframe>";
-  nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
-  publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
-  sitelink.innerHTML = "http://" + host + path;
-  }
-  loadcomments();
-  document.getElementById("freecom-node").onkeydown = function(e) {
-      var keyCode = e.keyCode || e.which;
-  
-     if (keyCode === 13) {
-       loadcomments();
-     }
-  }
-  </script>
-  
+    <!-- Babcom: Decentral Anonymous Spamresistant comments on Static Websites.
+    
+    Copyright: 2014 Arne Babenhauserheide (http://draketo.de) You are free
+    to use this under any license you chose. If you want to be nice,
+    release your changes under free software licenses.  -->
+    <style type="text/css">
+    #babcom-realcomments, #babcom-publicsoneid iframe {
+      /*width: 1024px;
+      height: 400px;*/
+      width: 1024px;
+      height: 100px;
+      border: solid thin black;
+    }
+    #babcom-needsfreenet {
+      width: 1024px;
+      height: 300px;
+      margin-bottom: -1em;
+      border: solid thin black;
+    }
+    #babcom-needsfreenet p, #babcom-needsfreenet blockquote {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+    </style>
+    <!-- TODO: Save the node in a cookie -->
+    <p><button type="button" onclick="loadcomments()">Reload Comments</button> Use Node: <input type="text" name="babcom-node" id="babcom-node" value="http://127.0.0.1:8888" /></p>
+    <div id="babcom-needsfreenet"><blockquote><strong>⚙ Babcom is trying to load the comments ⚙</strong></blockquote>
+    <p>This textbox will disappear when the comments have been loaded.</p>
+    <p>If the box below shows an error-page, you need to install <a href="http://freenetproject.org">Freenet</a> with the <a href="http://freesocial.draketo.de/sone_en.html">Sone-Plugin</a> or set the node-path to your freenet node and click the <tt>Reload Comments</tt> button (or return).</p>
+<p>If you see something like <code>Invalid key: java.net.MalformedURLException: There is no @ in that URI! (Sone/search.html)</code>, you need to setup <a href="http://freesocial.draketo.de/sone_en.html">Sone</a> and the <a href="http://freesocial.draketo.de/wot_en.html">Web of Trust</a></p></div>
+    <p id="babcom-comments"></p>
+    <p id="babcom-nojswarning">If you had Javascript enabled, you would see comments for this page instead of the Sone page of the sites author.</p>
+    <iframe id="babcom-publicsoneid" src="http://127.0.0.1:8888/Sone/viewSone.html?sone=6~ZDYdvAgMoUfG6M5Kwi7SQqyS-gTcyFeaNN1Pf3FvY"></iframe>
+    <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
+    <p>Link to this site: <span id="babcom-sitelink"></span></p>
+    <script type="text/javascript">
+            /* @licstart The following is the entire license notice for
+            the JavaScript code within this script block (script
+            to /script).
+    
+            Copyright (C) 2014  Arne Babenhauserheide
+    
+            The JavaScript code in this page is free software: you can
+            redistribute it and/or modify it under the terms of the GNU
+            General Public License (GNU GPL) as published by the Free Software
+            Foundation, either version 3 of the License, or (at your option)
+            any later version.  The code is distributed WITHOUT ANY WARRANTY;
+            without even the implied warranty of MERCHANTABILITY or FITNESS
+            FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+    
+            As additional permission under GNU GPL version 3 section 7, you
+            may distribute non-source (e.g., minimized or compacted) forms of
+            that code without the copy of the GNU GPL normally required by
+            section 4, provided you include this license notice and a URL
+            through which recipients can access the Corresponding Source.   
+    
+            As additional permission under GNU GPL version 3 section 7,
+            you may use this code under any other free software license,
+            including permissive licenses like BSD and MIT.
+    
+            @licend  The above is the entire license notice
+            for the JavaScript code  within these script block.
+            ,*/
+    function loadcomments()
+    {
+    var freenetnode = document.getElementById("babcom-node").value
+    var sonesearch = "/Sone/search.html?query="
+    var host = window.location.host;
+    var path = window.location.pathname;
+    var postsanchor = "post-results";
+    var searchquery = host + path + "#" + postsanchor;
+    var comments = document.getElementById("babcom-comments");
+    var publicsone = document.getElementById("babcom-publicsoneid");
+    var nojswarning = document.getElementById("babcom-nojswarning");
+    var needsfreenet = document.getElementById("babcom-needsfreenet");
+    var sitelink = document.getElementById("babcom-sitelink");
+    /* when the function gets rerun, replace the realcomments instead of adding.*/
+    if (document.getElementById("babcom-realcomments")) {
+        var cif = document.getElementById("babcom-realcomments");
+        cif.src = freenetnode + sonesearch + searchquery;
+    } else {
+        comments.innerHTML = "<iframe id=\"babcom-realcomments\" src=\"" + freenetnode + sonesearch + searchquery + "\"></iframe>";
+    }
+    nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
+    publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
+    sitelink.innerHTML = "http://" + host + path;
+    commentsiframe = document.getElementById("babcom-realcomments");
+    commentsiframe.onload = function(){
+            needsfreenet.parentNode.replaceChild(document.createElement("p"), needsfreenet);
+            commentsiframe.style.width = "1024px";
+            commentsiframe.style.height = "400px";
+        }
+    }
+    loadcomments();
+    document.getElementById("babcom-node").onkeydown = function(e) {
+        var keyCode = e.keyCode || e.which;
+    
+       if (keyCode === 13) {
+         loadcomments();
+       }
+    }
+    </script>
+    
 #+END_HTML
 
 * I don’t yet run freenet! How does this look?
@@ -119,79 +156,108 @@ Great!
 Just copy the following snippet to your site, and you’re good to go. The comments will appear where you pasted the snippet. All the code is inline and pure Javascript, so you can just paste it into any site which accepts HTML.
 
 #+BEGIN_SRC javascript
-  <!-- Freecom: Decentral Anonymous Spamresistant comments on Static Websites.
-  
-  Copyright: 2014 Arne Babenhauserheide (http://draketo.de) You are free
-  to use this under any license you chose. If you want to be nice,
-  release your changes under free software licenses.  -->
-  <style type="text/css">
-  #freecom-realcomments, #freecom-publicsoneid iframe {
-    min-width: 1024px;
-    min-height: 400px;
-  }
-  </style>
-  <!-- TODO: Save the node in a cookie -->
-  <p><button type="button" onclick="loadcomments()">Reload Comments</button> Use Node: <input type="text" name="freecom-node" id="freecom-node" value="http://127.0.0.1:8888" /></p>
-  <p id="freecom-comments"></p>
-  <p id="freecom-nojswarning">If you had Javascript enabled, you would see comments for this page instead of the Sone page of the sites author.</p>
-  <iframe id="freecom-publicsoneid" src="http://127.0.0.1:8888/Sone/viewSone.html?sone=6~ZDYdvAgMoUfG6M5Kwi7SQqyS-gTcyFeaNN1Pf3FvY"></iframe>
-  <p>(To see the comments, you need a locally running <a href="http://freenetproject.org">Freenet</a> with the Sone-Plugin. If you see something like <code>Invalid key: java.net.MalformedURLException: There is no @ in that URI! (Sone/search.html)</code>, you need to install <a href="http://freesocial.draketo.de/sone_en.html">Sone</a>)</p>
-  <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
-  <p>Link to this site: <span id="freecom-sitelink"></span></p>
-  <script type="text/javascript">
-          /* @licstart The following is the entire license notice for
-          the JavaScript code within this script block (script
-          to /script).
-  
-          Copyright (C) 2014  Arne Babenhauserheide
-  
-          The JavaScript code in this page is free software: you can
-          redistribute it and/or modify it under the terms of the GNU
-          General Public License (GNU GPL) as published by the Free Software
-          Foundation, either version 3 of the License, or (at your option)
-          any later version.  The code is distributed WITHOUT ANY WARRANTY;
-          without even the implied warranty of MERCHANTABILITY or FITNESS
-          FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-  
-          As additional permission under GNU GPL version 3 section 7, you
-          may distribute non-source (e.g., minimized or compacted) forms of
-          that code without the copy of the GNU GPL normally required by
-          section 4, provided you include this license notice and a URL
-          through which recipients can access the Corresponding Source.   
-  
-          As additional permission under GNU GPL version 3 section 7,
-          you may use this code under any other free software license,
-          including permissive licenses like BSD and MIT.
-  
-          @licend  The above is the entire license notice
-          for the JavaScript code  within these script block.
-          ,*/
-  function loadcomments()
-  {
-  var freenetnode = document.getElementById("freecom-node").value
-  var sonesearch = "/Sone/search.html?query="
-  var host = window.location.host;
-  var path = window.location.pathname;
-  var postsanchor = "post-results";
-  var searchquery = host + path + "#" + postsanchor;
-  var comments = document.getElementById("freecom-comments");
-  var publicsone = document.getElementById("freecom-publicsoneid");
-  var nojswarning = document.getElementById("freecom-nojswarning");
-  var sitelink = document.getElementById("freecom-sitelink");
-  comments.innerHTML = "<iframe id=\"freecom-realcomments\" src=\"" + freenetnode + sonesearch + searchquery + "\"></iframe>";
-  nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
-  publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
-  sitelink.innerHTML = "http://" + host + path;
-  }
-  loadcomments();
-  document.getElementById("freecom-node").onkeydown = function(e) {
-      var keyCode = e.keyCode || e.which;
-  
-     if (keyCode === 13) {
-       loadcomments();
-     }
-  }
-  </script>
+    <!-- Babcom: Decentral Anonymous Spamresistant comments on Static Websites.
+    
+    Copyright: 2014 Arne Babenhauserheide (http://draketo.de) You are free
+    to use this under any license you chose. If you want to be nice,
+    release your changes under free software licenses.  -->
+    <style type="text/css">
+    #babcom-realcomments, #babcom-publicsoneid iframe {
+      /*width: 1024px;
+      height: 400px;*/
+      width: 1024px;
+      height: 100px;
+      border: solid thin black;
+    }
+    #babcom-needsfreenet {
+      width: 1024px;
+      height: 300px;
+      margin-bottom: -1em;
+      border: solid thin black;
+    }
+    #babcom-needsfreenet p, #babcom-needsfreenet blockquote {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+    </style>
+    <!-- TODO: Save the node in a cookie -->
+    <p><button type="button" onclick="loadcomments()">Reload Comments</button> Use Node: <input type="text" name="babcom-node" id="babcom-node" value="http://127.0.0.1:8888" /></p>
+    <div id="babcom-needsfreenet"><blockquote><strong>⚙ Babcom is trying to load the comments ⚙</strong></blockquote>
+    <p>This textbox will disappear when the comments have been loaded.</p>
+    <p>If the box below shows an error-page, you need to install <a href="http://freenetproject.org">Freenet</a> with the <a href="http://freesocial.draketo.de/sone_en.html">Sone-Plugin</a> or set the node-path to your freenet node and click the <tt>Reload Comments</tt> button (or return).</p>
+<p>If you see something like <code>Invalid key: java.net.MalformedURLException: There is no @ in that URI! (Sone/search.html)</code>, you need to setup <a href="http://freesocial.draketo.de/sone_en.html">Sone</a> and the <a href="http://freesocial.draketo.de/wot_en.html">Web of Trust</a></p></div>
+    <p id="babcom-comments"></p>
+    <p id="babcom-nojswarning">If you had Javascript enabled, you would see comments for this page instead of the Sone page of the sites author.</p>
+    <iframe id="babcom-publicsoneid" src="http://127.0.0.1:8888/Sone/viewSone.html?sone=6~ZDYdvAgMoUfG6M5Kwi7SQqyS-gTcyFeaNN1Pf3FvY"></iframe>
+    <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
+    <p>Link to this site: <span id="babcom-sitelink"></span></p>
+    <script type="text/javascript">
+            /* @licstart The following is the entire license notice for
+            the JavaScript code within this script block (script
+            to /script).
+    
+            Copyright (C) 2014  Arne Babenhauserheide
+    
+            The JavaScript code in this page is free software: you can
+            redistribute it and/or modify it under the terms of the GNU
+            General Public License (GNU GPL) as published by the Free Software
+            Foundation, either version 3 of the License, or (at your option)
+            any later version.  The code is distributed WITHOUT ANY WARRANTY;
+            without even the implied warranty of MERCHANTABILITY or FITNESS
+            FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+    
+            As additional permission under GNU GPL version 3 section 7, you
+            may distribute non-source (e.g., minimized or compacted) forms of
+            that code without the copy of the GNU GPL normally required by
+            section 4, provided you include this license notice and a URL
+            through which recipients can access the Corresponding Source.   
+    
+            As additional permission under GNU GPL version 3 section 7,
+            you may use this code under any other free software license,
+            including permissive licenses like BSD and MIT.
+    
+            @licend  The above is the entire license notice
+            for the JavaScript code  within these script block.
+            ,*/
+    function loadcomments()
+    {
+    var freenetnode = document.getElementById("babcom-node").value
+    var sonesearch = "/Sone/search.html?query="
+    var host = window.location.host;
+    var path = window.location.pathname;
+    var postsanchor = "post-results";
+    var searchquery = host + path + "#" + postsanchor;
+    var comments = document.getElementById("babcom-comments");
+    var publicsone = document.getElementById("babcom-publicsoneid");
+    var nojswarning = document.getElementById("babcom-nojswarning");
+    var needsfreenet = document.getElementById("babcom-needsfreenet");
+    var sitelink = document.getElementById("babcom-sitelink");
+    /* when the function gets rerun, replace the realcomments instead of adding.*/
+    if (document.getElementById("babcom-realcomments")) {
+        var cif = document.getElementById("babcom-realcomments");
+        cif.src = freenetnode + sonesearch + searchquery;
+    } else {
+        comments.innerHTML = "<iframe id=\"babcom-realcomments\" src=\"" + freenetnode + sonesearch + searchquery + "\"></iframe>";
+    }
+    nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
+    publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
+    sitelink.innerHTML = "http://" + host + path;
+    commentsiframe = document.getElementById("babcom-realcomments");
+    commentsiframe.onload = function(){
+            needsfreenet.parentNode.replaceChild(document.createElement("p"), needsfreenet);
+            commentsiframe.style.width = "1024px";
+            commentsiframe.style.height = "400px";
+        }
+    }
+    loadcomments();
+    document.getElementById("babcom-node").onkeydown = function(e) {
+        var keyCode = e.keyCode || e.which;
+    
+       if (keyCode === 13) {
+         loadcomments();
+       }
+    }
+    </script>
 #+END_SRC
 
 * How does this work?
@@ -214,7 +280,7 @@ I just connected them to all the websites out there.
 
 In its current state, this works pretty well (if you have Freenet and Sone setup it loads faster than Disqus), but there are still lots of things which could be improved.
 
-Some changes in Sone can make Freecom much easier to use.
+Some changes in Sone can make Babcom much easier to use.
 
 - Add a text field to post a message directly to a search (currently you need to go to your profile page and post from there).
 - Precompute Searches for URLs to have almost instant results.
@@ -225,11 +291,21 @@ And this script might get a way to store a cookie, to make it remember the locat
 
 And integration with the Freemail-plugin would be cool, it could provide an anonymous contact-page, maybe using microformats to find the Freemail address for sending in a way which also allows using external tools.
 
+- Comment everywhere: A Greasemonkey-Script which allows commenting any website.
+
+* Using this from Android?
+
+If you want to access babcom-comments from Android, you currently need a home-server running freenet. Then you can forward port 8888 to your android device using ssh:
+
+#+BEGIN_SRC sh
+ssh -NL 8888:localhost:8888 <yourhost>
+#+END_SRC
+
 * Who are you?
 
 I’m Arne Babenhauserheide, I live in Graben (Germany) and I’m currently doing my PhD in physics at Karlsruhe Institute of Technology (KIT). [[http://draketo.de/themes/1w6/minnelli/logo.png]]
 
-I work on Freecom along with other free software and free culture projects, because I want to make the world a better place - if not for me than at least for my children.
+I work on Babcom along with other free software and free culture projects, because I want to make the world a better place - if not for me than at least for my children.
 
 The fight against censorship and surveillance is a pretty important battle for that. And one I’m equipped to fight (along with the battle for [[http://freedomdefined.org][free culture]] and spreading roleplaying games as a unique synthesis of art and communication).
 
@@ -284,7 +360,7 @@ Sure!
 
 If you use a news-site which is missing here, please drop me a line! (the comment form is above - you’re already running Freenet with Sone, right?)
 
-/(yes, I understand the irony of using centralized systems to spread the word about decentralized systems. Well, we have to start where we are, and if it gets more people to use freecom as decentral, anonymous, spam-resistant commenting system on mostly unhackable static pages, that’s a prize I’m willing to pay. On the upside: If most pages use this system, there won’t be a need to go this way in the future - and that’s a dream worth fighting for!)/
+/(yes, I understand the irony of using centralized systems to spread the word about decentralized systems. Well, we have to start where we are, and if it gets more people to use babcom as decentral, anonymous, spam-resistant commenting system on mostly unhackable static pages, that’s a prize I’m willing to pay. On the upside: If most pages use this system, there won’t be a need to go this way in the future - and that’s a dream worth fighting for!)/
 
 *** Or support me directly:
 
@@ -292,7 +368,7 @@ If you use a news-site which is missing here, please drop me a line! (the commen
 
 #+BEGIN_HTML
 <ul>
-<li>Flattr me: <a href="https://flattr.com/submit/auto?user_id=ArneBab&url=http%3A%2F%2Fdraketo.de%2Fproj%2Ffreecom%2F&title=Freecom:%20Anonymous,%20Decentral%20Comment-System%20for%20Static%20Websites" target="_blank"><img src="//api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></li>
+<li>Flattr me: <a href="https://flattr.com/submit/auto?user_id=ArneBab&url=http%3A%2F%2Fdraketo.de%2Fproj%2Fbabcom%2F&title=Babcom:%20Anonymous,%20Decentral%20Comment-System%20for%20Static%20Websites" target="_blank"><img src="//api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></li>
 <li>Gittip me: <script type="text/javascript" data-gittip-username="ArneBab" data-gittip-widget="button" src="//gttp.co/v1.js"></script></li>
 </ul>
 #+END_HTML
@@ -311,7 +387,7 @@ If you use a news-site which is missing here, please drop me a line! (the commen
 
 If you can hack Java and want to help, please get in contact! (via [[https://freenetproject.org/lists.html][email]] or [[https://webchat.freenode.net/?randomnick=1&channels=freenet][chat]] - #freenet @ freenode)
 
-*** Or, most importantly, install Freenet and use Freecom!
+*** Or, most importantly, install Freenet and use Babcom!
 
 See [[https://freenetproject.org][freenetproject.org]].
 
@@ -325,3 +401,8 @@ Let’s close this with the quote which made me start using freenet over ten yea
 # Local Variables:
 # org-html-doctype: "html5"
 # End:
+
+* Footnotes
+
+[fn:hope] You might recognize this phrase from Babylon 5. There’s a reason for that: If we want all people to be able to publish online without having to succumb to the rules of centralized services, we have to use static websites: Only those can sustainably withstand the constant attacks from crackers. And to have comments in a free internet without subjugating our /visitors/ to centralized sites, we must to use local services. To enable our visitors to speak freely, we must provide anonymous comments. And to make the system resilient against censorship by denial-of-service, we must have a spam-filter. Babcom uses Freenet to provide all this. And it gets defended by many small, coordinated nodes.
+
