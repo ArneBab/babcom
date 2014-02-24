@@ -1,0 +1,106 @@
+#+title: Freenet für Kommentare im Clearnet
+
+* Motivation
+
+Dynamische Seiten sind im heutigen Internet sehr Wartungsintensiv, weil immer wieder neue Sicherheitslücken gefunden werden, gegen die der Admin oder die Admin Maßnahmen ergreifen muss.
+
+Aber statische Seiten ohne jegliche Interaktivität schließen einen großen Teil der Handlungen aus, die das heutige Internet ausmachen - z.B. die einfache Kommunikation zwischen Lesenden und Veröffentlichenden.
+
+Gleichzeitig ist es immer schwieriger, auch nur ansatzweise anonym zu bleiben, so dass Leute in Schwierigkeiten kommen könnten, wenn sie auf Seiten kommentieren, die dem Status Quo kritisch gegenüberstehen. Wirklich anonyme Kommentare sind im Internet kaum mehr realisierbar, weil jede Seite, die anonyme Kommentare erlaubt in Gefahr schwebt, von kommerziellen Spammern entdeckt und unwartbar gemacht zu werden.
+
+Um dieses Problem zu lösen, können Webseiten mittels Javascript Daten von einem lokal laufenden Freenet-Knoten laden - und wenn der Besucher oder die Besurcheri kein Freenet am Laufen hat entweder auf einen Drittserver zurückgreifen oder darauf Hinweisen, dass die Seite Kommentare hätte, wenn lokal Freenet laufen würde. Dadurch werden alle drei Probleme gelöst:
+
+- Da die Seite statisch ist, muss sie nicht mehr ständig auf Sicherheitslücken geprüft werden: Durch Kommentare werden niemals Dateien auf dem Server geändert. Die Seite selbst ist vollständig readonly.
+- Besucher und Besucherinnen der Seite können Kommentare hinterlassen, die gleichzeitig auf der Seite sichtbar sind und in weiteren Diensten nutzbar sein könnten - z.B. als anonyme Kommunikationsplattform, in der Fundstücke aus dem Netz diskutiert werden, ähnlich wie reddit, aber wirklich dezentral.
+- In Freenet sind anonyme Beiträge bereits heute möglich, und das Pseudonyme Web-of-Trust verhindert Spam sehr effektiv, weil Leute nur Stück für Stück weit sichtbar werden und eine einzige Spam-Nachricht die über Wochen bis Monate aufgebaute Sichtbarkeit auf einen Schlag zerstört. In Freenet ist jede einzelne Spam-Nachricht sehr teuer, weil sie erst durch wirkliche soziale Interaktion ermöglicht wird.
+
+Weitergedacht, könnten Nutzer und Nutzerinnen eine Browsererweiterung nutzen, die diese Kommentarmöglichkeit auf allen Webseiten aktiviert.
+
+* Schritte (Roadmap)
+
+Das System lässt sich in mehreren Einzelschritten implementieren, die jeweils für sich schon nützlich sind.
+
+** iframe (freecomm 0.1)
+
+Als ersten Schritt holt sich das Javascript die URL der aktuellen Seite und fragt dann bei 127.0.0.1:8888/notes/embed/<url> an, ob es Kommentare dazu gibt. 
+
+http:// und https:// sollten dabei gleich interpretiert werden.
+
+Wenn die URL überhaupt irgendwelche Daten zurückliefert, zeigt das Javascript ein iframe, in dem die URL geladen wird.
+
+Wenn die URL keine Daten zurückliefert (oder eine Fehlermeldung), zeigt das Javascript eine Meldung wie "Die Kommentare auf dieser Seite benötigen ein lokal laufendes Freenet mit der Notes Erweiterung. Sie finden Freenet auf http://freenetproject.org".
+
+Jegliche Interaktion läuft in dem iframe, so dass das Javascript nichts über Logins, Submit-Knöpfe o.ä. wissen muss.
+
+** Style
+
+Die folgenden Schritte verschönern den Stil der eingebundenen Kommentare.
+
+(geht alles nicht: Cross-Domain-Requests müsste Freenet erlauben, was eine erhebliche Sicherheitslücke schaffen würde. Um das zu ermöglichen, bräuchte es einen zweiten lokalen Dienst, der aus verschiedenen Quellen Kommentare lädt - z.B. aus E-Mail via mu oder akonadi)
+
+*** iframe, correct size
+
+Als zweiten Schritt kann das Javascript die Daten laden, die Größe des Inhaltes mit den Kommentaren berechnen und dann einen für Seite und Kommentare passenden iframe erzeugen.
+
+*** iframe, in style
+
+Um die Kommentare schöner anzuzeigen, kann das Javascript die URL zu einer CSS-Datei dazuliefern. Die Freenet Notes-Erweiterung verlinkt dann die Datei als CSS-Script in dem zurückgelieferten Inhalt.
+
+Hierfür muss das Javascript bereits die Grundstruktur der Kommentarliste kennen (damit der Stil der richtigen Elemente in CSS definiert werden kann).
+
+*** inline
+
+Das Javascript lädt den Inhalt der Kommentare und bindet sie glatt ein. Hier muss das Javascript die API der Freenet-Erweiterung kennen.
+
+** Features
+
+Diese Schritte verbreitern die Anwendungsmöglichkeiten des Skriptes.
+
+*** Freenet in-Proxy
+
+Um Benutzer und Benutzerinnen ohne lokal laufendes Freenet einzubinden, prüft das Javascript, ob lokal Freenet läuft. Falls nicht, greift es stattdessen auf einen in-Proxy zurück. Ein in-Proxy funktioniert ähnlich wie ein outproxy von Tor, aber statt dass anonym auf Inhalte im normalen Netz zugegriffen werden kann, ermöglicht der in-Proxy es, auf Inhalte in Freenet zuzugreifen, ohne selbst Freenet laufen zu lassen. Allerdings natürlich nicht mehr wirklich anonym.
+
+Gibt es keine passenden Proxies, zeigt das Javascript die Aufforderung an, Freenet zu installieren.
+
+In-Proxies sollten zusammen auf ihren Seiten eine entsprechende Aufforderung einbinden - das muss nicht das Javascript übernehmen, weil das dafür nicht die notwendigen Informationen hat: Solange die Inhalte nicht komplett inline angezeigt werden, weiß nur der in-Proxy wie das Kommentarfeld wirklich angezeigt wird.
+
+Es gibt bereits einen mit Whitelist gesicherten in-Proxy für Freenet (auch wenn ich gerade mal wieder dessen Namen vergessen habe…), also bräuchte es dafür nicht allzu viele Anpassungen: Die notes-Erweiterung muss nur einen readonly modus haben.
+
+*** Mehrere Kommentarfelder pro Seite
+
+Statt nur ein Kommentarfeld pro URL zu haben, können auch Anker verlinkt werden (id- oder name-tags). Dann ruft das Javascript einfach eine URL auf wie die folgende:
+
+127.0.0.1:8888/notes/embed/<url>#<id>
+
+Damit muss dann in der notes-Erweiterung auch ein Javascript laufen, dass den Anker abfragt und die entsprechenden Inhalte liefert.
+
+Außerdem sollte es auch noch eine Syntax geben, um alle Kommentare zu bekommen, die nicht mit einer ID oder einem NAME aus einer angegebenen Liste markiert sind. Auf die Art wird sichergestellt, dass keine Kommentare verloren gehen, wenn der oder die Veröffentlichende die Struktur der Seite ändert: Alle Kommentare mit nun fehlenden IDs und NAMEs tauchen dann z.B. am Ende der Seite auf.
+
+Eine Möglichkeit dazu wäre es, einen zweiten Namespace für das Plugin zu haben, der dieses Verhalten bietet:
+
+127.0.0.1:8888/notes/embedotheranchors/<url>#<id>#<id>#<id>
+
+Diese Liste enthält dann alle Inhalte, die nicht zu einer der angegebenen IDs gehören. Da IDs per definition einzigartig sein müssen, sollten hierdurch keine Unklarheiten entstehen.
+
+Solange die URL existiert, bleiben die Kommentare dort sichtbar. Sie verlieren höchstens einen Teil ihres Kontextes.
+
+*** Weitere Backends
+
+Um die jeweiligen Informationen zu kodieren, sollte die notes-Erweiterung die jeweiligen IDs als hashtags in die Kommentare einbinden - allerdings mit Namespace, damit sie nicht in Konflikt mit regulären ids kommen. Damit könnten dann zusätzlich zu Freenet noch weitere Systeme genutzt werden: Alle, die eine Suchfunktion haben, die nach mehreren Tags suchen kann. Ein Beispiel dafür ist GNU social. Für etwas Anonymität könnte das Backend auch die angefragte URL hashen, so dass in der Nachricht dann stehen würde: <Kommentar> #hash(url) #id
+
+** Vollständig dezentral
+
+Um unabhängig von Seitenbetreibern zu werden, kann das Script erst via Greasemonkey eingebunden und dann in Browser-Erweiterungen konsolidiert werden.
+
+Dafür zu lösende Herausforderungen: Nach welchen IDs und NAMEs sollte ein Kommentarfeld plaziert werden - oder allgemeiner: Wo sollten Kommentare auftauchen?
+
+Um das zu vereinfachen, könnte das Greasemonkey-Skript ein allgemeines Kommentar-Overlay anbieten, das nur dann an einem bestimmten Ort auf der Seite lokalisiert, wenn entsprechende IDs in den Kommentaren stehen. Dafür muss dann zwar pro ID auf der Seite eine Anfrage an die Freenet-Erweiterung geschickt werden, aber da die lokal läuft, sollte das keine großen Kosten und keine große Latenz verursachen (zumindest nicht bei guter Implementierung).
+
+Für jede ID könnte Nutzern dann über ein kleines Overlay aufgezeigt werden, dass sie kommentieren können.
+
+Da das Skript nun nicht mehr mit der Mitarbeit der Betreibenden der Seite rechnen kann, könnte es sinnvoll sein, jeden Absatz kommentierbar zu machen. Vielleicht könnten dafür virtuelle IDs eingerichtet werden, ähnlich den Spezifikationsmöglichkeiten in CSS: tag>tag>tag.3 oder #id>tag.3 → 3. Tag in der Liste.
+
+Hier stellt dann das Feature, alle restlichen Kommentare am Ende zu zeigen sicher, dass keine Inhalte verloren gehen.
+
+Sobald wir das hätten, wäre ein vollständiges Shadowtalk implementiert: Kommentare zu jeglichen Inhalten im Internet.
+
