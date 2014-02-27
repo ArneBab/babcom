@@ -98,13 +98,6 @@ Do you like it?
               @licend  The above is the entire license notice
               for the JavaScript code  within these script block.
               ,*/
-      function hasOnlyWhitelistedCharacters(string)
-      {
-          // match all characters, which must be in the set
-          
-          console.log(whitelist.test(string));
-          return whitelist.test(string);
-      }
       function loadcomments()
       {
       var freenetnode = document.getElementById("babcom-node").value
@@ -234,13 +227,6 @@ Just copy the following snippet to your site, and you’re good to go. The comme
               @licend  The above is the entire license notice
               for the JavaScript code  within these script block.
               ,*/
-      function hasOnlyWhitelistedCharacters(string)
-      {
-          // match all characters, which must be in the set
-          
-          console.log(whitelist.test(string));
-          return whitelist.test(string);
-      }
       function loadcomments()
       {
       var freenetnode = document.getElementById("babcom-node").value
