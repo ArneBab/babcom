@@ -4,7 +4,7 @@
 
 #+BEGIN_ABSTRACT
 #+BEGIN_QUOTE
-Babcom[fn:babcom-name] provides Decentral, Anonymous, Spamresistant comments on Static Websites using [[http://freenetproject.org][Freenet]] with [[http://freesocial.draketo.de/sone_en.html][Sone]] and some simple Javascript.
+Babcom[fn:babcom-name] provides Decentralized, Anonymous, Spamresistant comments on Static Websites using [[http://freenetproject.org][Freenet]] with [[http://freesocial.draketo.de/sone_en.html][Sone]] and some simple Javascript.
 #+END_QUOTE
 #+END_ABSTRACT
 #+TOC: headlines 2
