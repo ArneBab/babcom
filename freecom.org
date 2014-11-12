@@ -1,4 +1,5 @@
 #+title: Babcom: Anonymous, Decentral Comment-System for Static Websites
+#+html_head: <link rel="stylesheet" title="Standard" href="./worg.css" type="text/css" />
 #+options: num:nil toc:nil
 
 
