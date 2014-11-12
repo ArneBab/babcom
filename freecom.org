@@ -41,8 +41,6 @@ Do you like it?
   release your changes under free software licenses.  -->
   <style type="text/css">
   #babcom-realcomments, #babcom-publicsoneid {
-    /*width: 1024px;
-    height: 400px;*/
     width: 1024px;
     height: 100px;
     border: solid thin black;
@@ -71,6 +69,7 @@ Do you like it?
   <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
   <p>Link to this site: <span id="babcom-sitelink"></span></p>
   <script type="text/javascript">
+  /* @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later */
           /* @licstart The following is the entire license notice for
           the JavaScript code within this script block (script
           to /script).
@@ -145,6 +144,7 @@ Do you like it?
        loadcomments();
      }
   }
+  /* @license-end */
   </script>
 #+END_HTML
 
@@ -200,6 +200,7 @@ Just copy the following snippet to your site, and you’re good to go. The comme
   <p><em>Note: To make a comment which isn’t a reply visible to others here, include a link to this site somewhere in the comment text.</em></p>
   <p>Link to this site: <span id="babcom-sitelink"></span></p>
   <script type="text/javascript">
+  /* @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later */
           /* @licstart The following is the entire license notice for
           the JavaScript code within this script block (script
           to /script).
@@ -274,6 +275,7 @@ Just copy the following snippet to your site, and you’re good to go. The comme
        loadcomments();
      }
   }
+  /* @license-end */
   </script>
 #+END_SRC
 
