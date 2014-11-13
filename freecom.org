@@ -399,6 +399,13 @@ Sure!
 If you use a news-site which is missing here, please drop me a line! (the comment form is above - you’re already running Freenet with Sone, right?)
 
 /(yes, I understand the irony of using centralized systems to spread the word about decentralized systems. Well, we have to start where we are, and if it gets more people to use babcom as decentral, anonymous, spam-resistant commenting system on mostly unhackable static pages, that’s a prize I’m willing to pay. On the upside: If most pages use this system, there won’t be a need to go this way in the future - and that’s a dream worth fighting for!)/
+*** Contribute to babcom
+
+Either simply improve the script and send the new version to arne_bab -ät- web -dot- de, or get [[http://mercurial.selenic.com][Mercurial]] and clone the full babcom sources via 
+
+#+BEGIN_SRC sh
+hg clone http://draketo.de/proj/freecom/repo
+#+END_SRC
 
 *** Or support me directly:
 
