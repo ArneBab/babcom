@@ -41,17 +41,24 @@ Do you like it?
   to use this under any license you chose. If you want to be nice,
   release your changes under free software licenses.  -->
   <style type="text/css">
-  #babcom-realcomments, #babcom-publicsoneid {
+  #babcom-realcomments {
     width: 1024px;
     height: 100px;
+    border: solid thin black;
+  }
+  #babcom-publicsoneid {
+    width: 1024px;
+    height: 300px;
     border: solid thin black;
   }
   #babcom-nojswarning {}
   #babcom-needsfreenet {
     width: 1024px;
-    height: 300px;
+    height: 100px;
     margin-bottom: -1em;
     border: solid thin black;
+    overflow: auto;
+    overflow-x: hidden; 
   }
   #babcom-needsfreenet p, #babcom-needsfreenet blockquote {
     padding-left: 0.5em;
@@ -126,9 +133,12 @@ Do you like it?
       iframe.setAttribute("id", "babcom-realcomments");
       iframe.setAttribute("src", iframesource);
       comments.parentNode.replaceChild(iframe, comments);
+      /* first run, change sizes to the js version */
+      iframe.style.height = "100px";
+      needsfreenet.style.height = "300px";
+      nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
+      publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
   }
-  nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
-  publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
   sitelink.innerHTML = sitepath;
   commentsiframe = document.getElementById("babcom-realcomments");
   commentsiframe.onload = function(){
@@ -170,19 +180,24 @@ Just copy the following snippet to your site, and you’re good to go. The comme
   to use this under any license you chose. If you want to be nice,
   release your changes under free software licenses.  -->
   <style type="text/css">
-  #babcom-realcomments, #babcom-publicsoneid {
-    /*width: 1024px;
-    height: 400px;*/
+  #babcom-realcomments {
     width: 1024px;
     height: 100px;
+    border: solid thin black;
+  }
+  #babcom-publicsoneid {
+    width: 1024px;
+    height: 300px;
     border: solid thin black;
   }
   #babcom-nojswarning {}
   #babcom-needsfreenet {
     width: 1024px;
-    height: 300px;
+    height: 100px;
     margin-bottom: -1em;
     border: solid thin black;
+    overflow: auto;
+    overflow-x: hidden; 
   }
   #babcom-needsfreenet p, #babcom-needsfreenet blockquote {
     padding-left: 0.5em;
@@ -257,9 +272,12 @@ Just copy the following snippet to your site, and you’re good to go. The comme
       iframe.setAttribute("id", "babcom-realcomments");
       iframe.setAttribute("src", iframesource);
       comments.parentNode.replaceChild(iframe, comments);
+      /* first run, change sizes to the js version */
+      iframe.style.height = "100px";
+      needsfreenet.style.height = "300px";
+      nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
+      publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
   }
-  nojswarning.parentNode.replaceChild(document.createElement("p"), nojswarning);
-  publicsone.parentNode.replaceChild(document.createElement("span"), publicsone);
   sitelink.innerHTML = sitepath;
   commentsiframe = document.getElementById("babcom-realcomments");
   commentsiframe.onload = function(){
