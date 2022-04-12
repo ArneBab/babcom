@@ -1,6 +1,8 @@
 Babcom: comments on static websites
 ================================
 
+**Status: Dead due to changes in browsers that prevent the access used here. Needs a dedicated service to support it.**
+
 Decentral, Anonymous Comment-System for Static Websites to survive on the battlefield into which commercial spammers and censors turned the internet.
 
 Use it by embedding a simple snippet in the body of your site.
